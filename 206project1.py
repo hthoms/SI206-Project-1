@@ -80,7 +80,6 @@ def findAge(a):
 	for student in a:
 		bdate = student['DOB']
 		bdate = bdate.split('/')
-		print("birthdate: ", bdate)
 		born = datetime.date(int(bdate[2]), int(bdate[0]), int(bdate[1]))
 		today = datetime.date.today()
 		timedelta = today - born
@@ -89,7 +88,6 @@ def findAge(a):
 			age -= 1
 		elif today.month == born.month and today.day < born.day:
 			age -= 1
-		print("age: ", age)
 		total += age
 		num += 1
 		
@@ -103,9 +101,17 @@ def mySortPrint(a,col,fileName):
 #Input: list of dictionaries, key to sort by and output file name
 #Output: None
 
-	#Your code here:
-	pass
-
+	newdata = sorted(a, key = lambda k:k[col])
+	f = open(fileName, "w")
+	for entry in newdata:
+		f.write(entry['First'])
+		f.write(",")
+		f.write(entry['Last'])
+		f.write(",")
+		f.write(entry['Email'])
+		f.write(",\n")
+	f.close()
+	return f
 
 
 ################################################################
@@ -157,10 +163,10 @@ def main():
 	total += test(findAge(data2),41,10)
 	'''
 	HANNAH TEST DATA START
-	'''
+	
 	data3 = getData('206_p1_test.csv')
 	findAge(data3),
-	'''
+	
 	HANNAH TEST DATA END
 	'''
 	
