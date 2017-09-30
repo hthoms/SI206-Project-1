@@ -78,21 +78,15 @@ def findAge(a):
 	total = 0
 	num = 0
 	for student in a:
-		bdate = student['DOB']
-		bdate = bdate.split('/')
+		bdate = student['DOB'].split('/')
 		born = datetime.date(int(bdate[2]), int(bdate[0]), int(bdate[1]))
 		today = datetime.date.today()
-		timedelta = today - born
 		age = today.year - born.year 
-		if today.month < born.month:
-			age -= 1
-		elif today.month == born.month and today.day < born.day:
-			age -= 1
+		if (today.month < born.month) or (today.month == born.month and today.day < born.day): age -= 1
+		if born.year > today.year: age = 0
 		total += age
 		num += 1
-		
-	avgage = total / num
-	print("avgage: ",avgage)
+	avgage = round(total / num)
 	return int(avgage)
 
 #Similar to mySort, but instead of returning single
