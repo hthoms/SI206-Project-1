@@ -19,7 +19,7 @@ def getData(file):
 	headers = str(f.readline()).strip("\n").split(",")
 	l = []
 	for row in f:
-		rowdata = str(row.strip("\n")).split(",")
+		rowdata = str(row.strip()).split(",")
 		d = {}
 		i = 0
 		for data in rowdata:
@@ -79,11 +79,11 @@ def findAge(a):
 	num = 0
 	for student in a:
 		bdate = student['DOB'].split('/')
-		born = datetime.date(int(bdate[2]), int(bdate[0]), int(bdate[1]))
+		birth = datetime.date(int(bdate[2]), int(bdate[0]), int(bdate[1]))
 		today = datetime.date.today()
-		age = today.year - born.year 
-		if (today.month < born.month) or (today.month == born.month and today.day < born.day): age -= 1
-		if born.year > today.year: age = 0
+		age = today.year - birth.year 
+		if (today.month < birth.month) or (today.month == birth.month and today.day < birth.day): age -= 1
+		if birth.year > today.year: age = 0
 		total += age
 		num += 1
 	avgage = round(total / num)
@@ -155,14 +155,6 @@ def main():
 	print("\nThe average age is:")
 	total += test(findAge(data),39,10)
 	total += test(findAge(data2),41,10)
-	'''
-	HANNAH TEST DATA START
-	
-	data3 = getData('206_p1_test.csv')
-	findAge(data3),
-	
-	HANNAH TEST DATA END
-	'''
 	
 	print("\nSuccessful sort and print to file:")
 	mySortPrint(data,'Last','results.csv')
